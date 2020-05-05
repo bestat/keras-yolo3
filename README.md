@@ -2,6 +2,10 @@
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
 
+## change points from original
+1. modify some lines to run on tensorflow 1.14.0
+1. add `detect.py` to detect hands on all test data at once
+
 ## Introduction
 
 A Keras implementation of YOLOv3 (Tensorflow backend) inspired by [allanzelener/YAD2K](https://github.com/allanzelener/YAD2K).
