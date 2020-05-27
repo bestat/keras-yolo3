@@ -126,7 +126,7 @@ class YOLO(object):
                 self.input_image_shape: [image.size[1], image.size[0]],
                 K.learning_phase(): 0
             })
-        elapsed_time = elapsed_start - time.time()
+        elapsed_time = time.time() - elapsed_start
 
         print('Found {} boxes for {}'.format(len(out_boxes), 'img'))
 
