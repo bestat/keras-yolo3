@@ -85,8 +85,8 @@ if __name__ == '__main__':
     )
 
     parser.add_argument(
-        "--output", nargs='?', type=str, default="",
-        help = "[Optional] Video output path"
+        "--output", nargs='?', type=str, default="./output",
+        help = "save path"
     )
 
     FLAGS = parser.parse_args()
