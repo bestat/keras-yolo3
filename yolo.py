@@ -6,6 +6,7 @@ Class definition of YOLO_v3 style detection model on image and video
 import colorsys
 import os
 from timeit import default_timer as timer
+import time
 
 import numpy as np
 from keras import backend as K
@@ -99,7 +100,7 @@ class YOLO(object):
                 score_threshold=self.score, iou_threshold=self.iou)
         return boxes, scores, classes
 
-    def detect_image(self, image):
+    def detect_image(self, image, time_log=False):
         start = timer()
 
         if self.model_image_size != (None, None):
@@ -116,6 +117,8 @@ class YOLO(object):
         image_data /= 255.
         image_data = np.expand_dims(image_data, 0)  # Add batch dimension.
 
+        # count elapsed time
+        elapsed_start = time.time()
         out_boxes, out_scores, out_classes = self.sess.run(
             [self.boxes, self.scores, self.classes],
             feed_dict={
@@ -123,6 +126,7 @@ class YOLO(object):
                 self.input_image_shape: [image.size[1], image.size[0]],
                 K.learning_phase(): 0
             })
+        elapsed_time = elapsed_start - time.time()
 
         print('Found {} boxes for {}'.format(len(out_boxes), 'img'))
 
@@ -164,7 +168,10 @@ class YOLO(object):
 
         end = timer()
         print(end - start)
-        return image
+        if time_log:
+            return image, elapsed_time
+        else:
+            return image
 
     def close_session(self):
         self.sess.close()

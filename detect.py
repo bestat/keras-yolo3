@@ -5,6 +5,8 @@ import argparse
 from yolo import YOLO, detect_video
 from PIL import Image
 
+import numpy as np
+
 import tensorflow as tf
 config = tf.ConfigProto()
 config.gpu_options.allow_growth = True
@@ -25,13 +27,17 @@ def detect_img_on_csv(yolo, csv_path, save_root='./output'):
     """
     with open(csv_path) as f:
         reader = csv.reader(f, delimiter=' ')
+        time_list = []
         for row in reader:
             image = Image.open(row[0])
-            r_image = yolo.detect_image(image)
+            r_image, elapsed_time = yolo.detect_image(image, time_log=True)
+            time_list.append(elapsed_time)
             name, ext = os.path.splitext(os.path.basename(row[0]))
             savename = os.path.join(save_root, name + '_detect' + ext)
             r_image.save(savename)
         yolo.close_session()
+        print('===detected===')
+        print('average time: {}'.format(np.mena(time_list)))
 
 
 FLAGS = None
