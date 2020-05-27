@@ -37,7 +37,7 @@ def detect_img_on_csv(yolo, csv_path, save_root='./output'):
             r_image.save(savename)
         yolo.close_session()
         print('===detected===')
-        print('average time: {}'.format(np.mena(time_list)))
+        print('average time: {}'.format(np.mean(time_list)))
 
 
 FLAGS = None
