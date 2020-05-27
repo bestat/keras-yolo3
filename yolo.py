@@ -21,9 +21,9 @@ from keras.utils import multi_gpu_model
 
 class YOLO(object):
     _defaults = {
-        "model_path": './logs/000/ep021-loss33.837-val_loss33.488.h5',
-        "anchors_path": './model_data/yolo_anchors.txt',
-        "classes_path": './custom_data/classes.txt',
+        "model_path": './logs/tiny-001/trained_weights_final.h5',
+        "anchors_path": './model_data/tiny_yolo_anchors.txt',
+        "classes_path": '../src/bestat/data/EgoHands/classes.txt',
         "score" : 0.3,
         "iou" : 0.45,
         "model_image_size" : (352, 640),
